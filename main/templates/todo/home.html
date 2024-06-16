@@ -1,0 +1,54 @@
+{% extends "core/layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include "core/navbar.html" %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {% include "todo/filters.html" %}
+                <br>
+                <hr>
+                <br>
+                <div class="row justify-content-end mb-4">
+                    <div class="col-auto">
+                        <button onclick="window.location.href='/todo/add'" class="btn btn-primary">Add Todo</button>
+                    </div>
+                </div>
+                {% if todos|length == 0 %}
+                    <div class="alert alert-info text-center" role="alert">
+                        No todos! <a href="/todo/add" class="alert-link">Add some</a>.
+                    </div>
+                {% else %}
+                    <ul class="list-group">
+                        {% for todo in todos %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                           {% if todo.is_complete %}checked{% endif %}
+                                           onclick="window.location.href='/todo/check/{{ todo.id }}'">
+                                    <label class="form-check-label ml-2"
+                                           style="{% if todo.is_complete %}text-decoration: line-through;{% endif %}">
+                                        <strong>{{ todo.title }}</strong>
+                                    </label>&nbsp;
+                                    <small>{{ todo.description }}</small><br>
+                                    <small class="text-muted">{{ todo.date_time.strftime('%B %d, %Y %I:%M %p') }}</small>
+                                </div>
+                                <div>
+                                    <button onclick="window.location.href='/todo/update/{{ todo.id }}'"
+                                            class="btn btn-sm btn-warning">Edit
+                                    </button>
+                                    <button onclick="window.location.href='/todo/delete/{{ todo.id }}'"
+                                            class="btn btn-sm btn-danger">Delete
+                                    </button>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

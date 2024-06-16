@@ -1,0 +1,54 @@
+{% extends "core/layout.html" %}
+{% block title %}Add Todo{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include "core/navbar.html" %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5">
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        Add Todo
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" name="title" placeholder="Enter title"
+                                           required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="time">Time</label>
+                                    <input type="datetime-local" class="form-control" id="time" name="date_time"
+                                           required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Enter description"
+                                          name="description"></textarea>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var now = new Date();
+            var datetimeLocalInput = document.getElementById('time');
+            datetimeLocalInput.value = now.toISOString().slice(0, 16);
+        });
+    </script>
+{% endblock %}

@@ -7,8 +7,8 @@ from main import db
 
 
 class User(db.Model):
-    __tablename__ = 'auth'
-    id = db.Column('id', String(36), primary_key=True, default=str(uuid.uuid4()))
+    __tablename__ = 'user'
+    id = db.Column('id', String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email = db.Column('email', String(255), nullable=True, unique=True)
     password = db.Column('password', String(255), nullable=True)
     full_name = db.Column('full_name', String(255), nullable=False)

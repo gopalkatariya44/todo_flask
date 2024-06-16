@@ -1,0 +1,59 @@
+<!-- Filter Form -->
+<form method="GET" action="{{ url_for('home') }}">
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control mb-2" name="title" placeholder="Title"
+                   value="{{ request.args.get('title', '') }}">
+        </div>
+        <div class="col">
+            <select class="form-control mb-2" name="is_complete">
+                <option value="">Completion Status</option>
+                <option value="1"
+                        {% if request.args.get('is_complete') == '1' %}selected{% endif %}>
+                    Completed
+                </option>
+                <option value="0"
+                        {% if request.args.get('is_complete') == '0' %}selected{% endif %}>Not
+                    Completed
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control mb-2" name="description"
+                           placeholder="Description"
+                           value="{{ request.args.get('description', '') }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="ms-2">Start Date</label>
+                    <input type="datetime-local" class="form-control mb-2" name="start_date"
+                           value="{{ request.args.get('start_date', '') }}">
+                </div>
+                <div class="col">
+                    <label class="ms-2">End Date</label>
+                    <input type="datetime-local" class="form-control mb-2" name="end_date"
+                           value="{{ request.args.get('end_date', '') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <br>
+            <button type="submit" class="btn btn-primary mb-2">Filter</button>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary mb-2">Clear</a>
+            <a class="btn btn-outline-primary mb-2" data-bs-toggle="collapse" href="#collapseExample"
+               role="button"
+               aria-expanded="false" aria-controls="collapseExample">
+                More Filters
+            </a>
+
+        </div>
+    </div>
+</form>

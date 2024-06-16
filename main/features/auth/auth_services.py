@@ -13,7 +13,7 @@ class AuthServices:
     @staticmethod
     @login_manager.user_loader
     def load_user(user_id):
-        return User.get(user_id)
+        return User.query.filter_by(id=user_id).first()
 
     @staticmethod
     def get_google_provider_cfg():

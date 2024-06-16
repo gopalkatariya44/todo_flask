@@ -1,0 +1,53 @@
+{% extends "core/layout.html" %}
+{% block title %}User{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        h1 {
+            font-size: 60px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 36px;
+            margin: 0 auto; /* Center horizontally */
+        }
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .text-muted {
+            font-size: 0.9rem;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    {% include "core/navbar.html" %}
+    <div class="container mt-5">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="avatar rounded-circle mb-3">
+                            <h1>{{ user.full_name[0].upper() }}</h1>
+                        </div>
+                        <h5 class="card-title mb-0">{{ user.full_name }}</h5>
+                        <p class="card-text text-muted">{{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
